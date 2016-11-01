@@ -1,0 +1,217 @@
+<head>
+  <title>PersonalAssistant</title>
+</head>
+
+<body>
+ 
+ 
+</body>
+
+<template name="layout">
+   <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/home">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+        {{> yield "menu"}}
+    </div>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-1 sidenav">
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+    </div>
+    <div class="col-sm-8 text-left">
+      {{> yield}}
+     
+    </div>
+    <div class="col-sm-3 sidenav">
+        {{> tasks}}
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer>
+</template>
+
+<template name="tasks">
+      <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Tasks</h3>
+            </div>
+            <div class="panel-body">
+                <table>
+                    {{#each tasks}}
+                    <tr><td class="text-left"><input class="js-task-status" value="{{_id}}" type="checkbox">{{title}}</td>
+                    </tr>
+                    {{/each}}
+                <!--    <tr><td class="text-left"><input type="checkbox"> Prepare PPT</td>
+                    </tr>-->
+                </table>
+                
+                <hr/>
+                
+        
+            </div>
+        </div>
+
+</template>
+
+<template name="newTask">
+    <!-- Add/Modify Tasks -->
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Tasks</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-vertical js-task-form" style="text-align:left" >
+            <div class="form-group">
+                <label for="title" class=" control-label">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="task">
+            </div>
+
+            <div class="form-group">
+                <label for="type" class="control-label">Type</label>
+                <input type="text" class="form-control" id="type" placeholder="Type">
+            </div>
+
+            <div class="form-group">
+                <label for="dueon" class="control-label">Due On</label>
+                <input type="date" class="form-control" id="dueOn" placeholder="">
+            </div>    
+
+            <div class="form-group">
+                    <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </form>                
+        </div>
+    </div>
+</template>
+
+<template name="menu_authenticated">
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="/home">Home</a></li>
+        <li><a href="/tasks#">Tasks</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/team">Team</a></li>
+        <li><a href="#">Tools</a></li>
+          <li><a href="#">Quick References</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> User: </a></li>
+      </ul>
+    
+</template>
+
+<template name="menu_original">
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="/home">Home</a></li>
+        
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+</template>
+
+<template name="team">
+    <br>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Team</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="js-team-title" >#</th>
+                        <th class="js-team-title" data-field="empId">ID</th>
+                        <th class="js-team-title" data-field="name">Name</th>
+                        <th class="js-team-title" data-field="location">Location</th>
+                        <th class="js-team-title" data-field="projectId">Project</th>
+                        <th class="js-team-title" data-field="grade">Level</th>
+                        <th class="js-team-title" data-field="joinedOn">DOJ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {{#each employees}}
+                        <tr>
+                            <td>{{@index}}</td>
+                            <td>{{empId}}</td>
+                            <td>{{name}}</td>
+                            <td>{{location}}</td>
+                            <td>{{projectId}}</td>
+                            <td>{{grade}}</td>
+                            <td>{{joinedOn}}</td>
+                        </tr>
+                    {{/each}}
+                    
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+ 
+</template>
+
+<template name="projectlist">
+  
+ <br>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Projects</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="js-project-title" >#</th>
+                        <th class="js-project-title" data-field="id">ID</th>
+                        <th class="js-project-title" data-field="title">Title</th>
+                        <th class="js-project-title" data-field="pm">Manager</th>
+                       <!-- <th class="js-project-title" data-field="dm">Delivery Manager</th>-->
+                        <th class="js-project-title" data-field="customer">Customer</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {{#each projects}}
+                        <tr>
+                            <td>{{@index}}</td>
+                            <td>{{id}}</td>
+                            <td>{{title}}</td>
+                            <td>{{pm}}</td>
+                            <!--<td>{{dm}}</td>-->
+                            <td>{{customer}}</td>
+                        </tr>
+                    {{/each}}
+                    
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</template>
+
+<template name="login">
+  <h2>Login</h2>
+ 
+</template>
+
+<template name="home">
+  <h2>Home</h2>
+ 
+</template>
